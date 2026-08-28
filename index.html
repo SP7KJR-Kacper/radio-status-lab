@@ -5,8 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="color-scheme" content="dark">
   <meta name="referrer" content="strict-origin-when-cross-origin">
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src https://docs.google.[...]">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src https://docs.google.com; frame-src https://logbook.qrz.com;">
   <title>SP7KJR · Radio Status</title>
+
   <style>
     :root {
       --bg: #070b12;
@@ -24,7 +25,8 @@
       --red: #ff7986;
       --red-soft: rgba(255, 121, 134, .14);
       --radius: 20px;
-      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system,
+        BlinkMacSystemFont, "Segoe UI", sans-serif;
     }
 
     /* Theme CSS Variables */
@@ -139,9 +141,13 @@
       animation: pulse-alert 1s infinite;
     }
 
-    * { box-sizing: border-box; }
+    * {
+      box-sizing: border-box;
+    }
 
-    html { background: var(--bg); }
+    html {
+      background: var(--bg);
+    }
 
     body {
       min-width: 320px;
@@ -205,7 +211,9 @@
       transition: background-image 0.4s ease;
     }
 
-    button { font: inherit; }
+    button {
+      font: inherit;
+    }
 
     .shell {
       width: min(100% - 32px, 920px);
@@ -239,8 +247,14 @@
       border: 1px solid var(--theme-primary);
       border-radius: 15px;
       color: var(--theme-primary);
-      background: linear-gradient(145deg, var(--theme-primary-soft), rgba(84, 215, 255, .03));
-      box-shadow: inset 0 1px 0 rgba(255, 255, 255, .08), 0 12px 28px rgba(0, 0, 0, .2);
+      background: linear-gradient(
+        145deg,
+        var(--theme-primary-soft),
+        rgba(84, 215, 255, .03)
+      );
+      box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, .08),
+        0 12px 28px rgba(0, 0, 0, .2);
       transition: all 0.4s ease;
     }
 
@@ -253,8 +267,16 @@
       opacity: .58;
     }
 
-    .signal-mark::before { width: 23px; height: 23px; }
-    .signal-mark::after { width: 39px; height: 39px; opacity: .28; }
+    .signal-mark::before {
+      width: 23px;
+      height: 23px;
+    }
+
+    .signal-mark::after {
+      width: 39px;
+      height: 39px;
+      opacity: .28;
+    }
 
     .signal-mark span {
       z-index: 1;
@@ -265,7 +287,9 @@
       box-shadow: 0 0 16px currentColor;
     }
 
-    .brand-copy { min-width: 0; }
+    .brand-copy {
+      min-width: 0;
+    }
 
     .eyebrow,
     .section-label,
@@ -312,8 +336,14 @@
       border: 1px solid rgba(255, 201, 104, .44);
       border-left: 4px solid var(--amber);
       border-radius: var(--radius);
-      background: linear-gradient(135deg, rgba(77, 55, 20, .78), rgba(32, 28, 22, .92));
-      box-shadow: 0 18px 50px rgba(0, 0, 0, .22), inset 0 1px 0 rgba(255, 255, 255, .05);
+      background: linear-gradient(
+        135deg,
+        rgba(77, 55, 20, .78),
+        rgba(32, 28, 22, .92)
+      );
+      box-shadow:
+        0 18px 50px rgba(0, 0, 0, .22),
+        inset 0 1px 0 rgba(255, 255, 255, .05);
     }
 
     .notice-card::after {
@@ -377,36 +407,68 @@
       padding: clamp(24px, 5vw, 40px);
       border: 1px solid var(--line);
       border-radius: 28px;
-      background: linear-gradient(135deg, rgba(18, 34, 51, .96), rgba(9, 17, 28, .95));
-      box-shadow: 0 24px 70px rgba(0, 0, 0, .28), inset 0 1px 0 rgba(255, 255, 255, .05);
+      background: linear-gradient(
+        135deg,
+        rgba(18, 34, 51, .96),
+        rgba(9, 17, 28, .95)
+      );
+      box-shadow:
+        0 24px 70px rgba(0, 0, 0, .28),
+        inset 0 1px 0 rgba(255, 255, 255, .05);
       transition: all 0.4s ease;
     }
 
     body.theme-offline .status-panel {
-      background: linear-gradient(135deg, rgba(15, 30, 46, .96), rgba(7, 15, 24, .95));
+      background: linear-gradient(
+        135deg,
+        rgba(15, 30, 46, .96),
+        rgba(7, 15, 24, .95)
+      );
       border-color: rgba(26, 58, 82, .3);
     }
 
     body.theme-qrl .status-panel {
-      background: linear-gradient(135deg, rgba(46, 15, 20, .96), rgba(24, 7, 12, .95));
+      background: linear-gradient(
+        135deg,
+        rgba(46, 15, 20, .96),
+        rgba(24, 7, 12, .95)
+      );
       border-color: rgba(138, 26, 35, .3);
     }
 
     body.theme-onair .status-panel {
-      background: linear-gradient(135deg, rgba(20, 60, 40, .96), rgba(10, 30, 20, .95));
+      background: linear-gradient(
+        135deg,
+        rgba(20, 60, 40, .96),
+        rgba(10, 30, 20, .95)
+      );
       border-color: rgba(0, 150, 80, .4);
-      box-shadow: 0 24px 70px rgba(0, 0, 0, .28), inset 0 1px 0 rgba(255, 255, 255, .05), 0 0 40px rgba(0, 255, 111, .2);
+      box-shadow:
+        0 24px 70px rgba(0, 0, 0, .28),
+        inset 0 1px 0 rgba(255, 255, 255, .05),
+        0 0 40px rgba(0, 255, 111, .2);
     }
 
     body.theme-mobile .status-panel {
-      background: linear-gradient(135deg, rgba(60, 40, 20, .96), rgba(30, 20, 10, .95));
+      background: linear-gradient(
+        135deg,
+        rgba(60, 40, 20, .96),
+        rgba(30, 20, 10, .95)
+      );
       border-color: rgba(200, 120, 50, .3);
     }
 
     body.theme-alert .status-panel {
-      background: linear-gradient(135deg, rgba(60, 20, 20, .96), rgba(30, 10, 10, .95));
+      background: linear-gradient(
+        135deg,
+        rgba(60, 20, 20, .96),
+        rgba(30, 10, 10, .95)
+      );
       border-color: rgba(200, 50, 50, .4);
-      box-shadow: 0 24px 70px rgba(0, 0, 0, .28), inset 0 1px 0 rgba(255, 255, 255, .05), 0 0 40px rgba(255, 68, 68, .2);
+      box-shadow:
+        0 24px 70px rgba(0, 0, 0, .28),
+        inset 0 1px 0 rgba(255, 255, 255, .05),
+        0 0 40px rgba(255, 68, 68, .2);
     }
 
     .status-panel::after {
@@ -418,7 +480,9 @@
       content: "";
       border: 1px solid var(--theme-primary);
       border-radius: 50%;
-      box-shadow: 0 0 0 24px var(--theme-primary-soft), 0 0 0 48px rgba(84, 215, 255, .02);
+      box-shadow:
+        0 0 0 24px var(--theme-primary-soft),
+        0 0 0 48px rgba(84, 215, 255, .02);
       pointer-events: none;
       opacity: 0.6;
       transition: all 0.4s ease;
@@ -438,7 +502,9 @@
       height: 9px;
       border-radius: 50%;
       background: var(--theme-primary);
-      box-shadow: 0 0 0 5px var(--theme-primary-soft), 0 0 16px var(--theme-glow);
+      box-shadow:
+        0 0 0 5px var(--theme-primary-soft),
+        0 0 16px var(--theme-glow);
       transition: all 0.4s ease;
     }
 
@@ -486,9 +552,17 @@
       opacity: .72;
     }
 
-    .connection.is-success { color: var(--green); }
-    .connection.is-warning { color: var(--amber); }
-    .connection.is-error { color: var(--red); }
+    .connection.is-success {
+      color: var(--green);
+    }
+
+    .connection.is-warning {
+      color: var(--amber);
+    }
+
+    .connection.is-error {
+      color: var(--red);
+    }
 
     .dashboard {
       display: grid;
@@ -532,7 +606,9 @@
       border-color: rgba(200, 50, 50, .2);
     }
 
-    .data-card--wide { grid-column: span 2; }
+    .data-card--wide {
+      grid-column: span 2;
+    }
 
     .card-label {
       display: flex;
@@ -661,7 +737,10 @@
       box-shadow: inset 0 1px 0 rgba(255, 255, 255, .05);
       font-size: 13px;
       font-weight: 700;
-      transition: transform .18s ease, background .18s ease, border-color .18s ease;
+      transition:
+        transform .18s ease,
+        background .18s ease,
+        border-color .18s ease;
     }
 
     .refresh:hover,
@@ -791,7 +870,10 @@
       color: var(--text);
       background: rgba(255, 255, 255, .025);
       text-decoration: none;
-      transition: border-color .18s ease, background .18s ease, transform .18s ease;
+      transition:
+        border-color .18s ease,
+        background .18s ease,
+        transform .18s ease;
     }
 
     .contact-link:hover {
@@ -861,6 +943,20 @@
       font-weight: 750;
     }
 
+    /* QRZ Logbook */
+    .qrz-logbook {
+      margin-top: 20px;
+      overflow: hidden;
+    }
+
+    .qrz-logbook iframe {
+      display: block;
+      width: 100%;
+      max-width: 640px;
+      height: 500px;
+      border: 0;
+    }
+
     .site-footer {
       display: flex;
       justify-content: space-between;
@@ -872,106 +968,219 @@
       font-size: 12px;
     }
 
-    .site-footer p { margin: 0; }
+    .site-footer p {
+      margin: 0;
+    }
 
     @media (max-width: 560px) {
-      .shell { width: min(100% - 24px, 920px); padding-top: 24px; }
-      .site-header { align-items: flex-start; }
-      .clock { display: none; }
-      .dashboard { grid-template-columns: 1fr; }
-      .data-card--wide { grid-column: auto; }
-      .data-card { min-height: 126px; }
-      .controls { align-items: flex-start; flex-direction: column-reverse; }
-      .action-group { width: 100%; }
-      .action-group > * { flex: 1; }
-      .contact-grid { grid-template-columns: 1fr; }
-      .abbreviations { grid-template-columns: 1fr; }
-      .site-footer { display: block; }
-      .site-footer p + p { margin-top: 5px; }
+      .shell {
+        width: min(100% - 24px, 920px);
+        padding-top: 24px;
+      }
+
+      .site-header {
+        align-items: flex-start;
+      }
+
+      .clock {
+        display: none;
+      }
+
+      .dashboard {
+        grid-template-columns: 1fr;
+      }
+
+      .data-card--wide {
+        grid-column: auto;
+      }
+
+      .data-card {
+        min-height: 126px;
+      }
+
+      .controls {
+        align-items: flex-start;
+        flex-direction: column-reverse;
+      }
+
+      .action-group {
+        width: 100%;
+      }
+
+      .action-group > * {
+        flex: 1;
+      }
+
+      .contact-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .abbreviations {
+        grid-template-columns: 1fr;
+      }
+
+      .site-footer {
+        display: block;
+      }
+
+      .site-footer p + p {
+        margin-top: 5px;
+      }
     }
 
     @media (prefers-reduced-motion: reduce) {
-      *, *::before, *::after { scroll-behavior: auto !important; transition: none !important; }
+      *,
+      *::before {
+        scroll-behavior: auto !important;
+        transition: none !important;
+      }
     }
   </style>
 </head>
+
 <body>
   <main class="shell">
-    <aside class="notice-card" id="noticeCard" role="alert" aria-live="assertive" hidden>
+
+    <aside
+      class="notice-card"
+      id="noticeCard"
+      role="alert"
+      aria-live="assertive"
+      hidden
+    >
       <p class="notice-label">QST · Station Notice</p>
       <p class="notice-value" id="noticeText"></p>
     </aside>
 
     <header class="site-header">
       <div class="brand">
-        <div class="signal-mark" aria-hidden="true"><span></span></div>
+        <div class="signal-mark" aria-hidden="true">
+          <span></span>
+        </div>
+
         <div class="brand-copy">
           <p class="eyebrow">Amateur Radio Station</p>
           <h1 class="callsign">SP7KJR</h1>
         </div>
       </div>
+
       <div class="clock" aria-label="Local time">
         LOCAL TIME
         <strong id="clock">--:--:--</strong>
       </div>
     </header>
 
-    <section class="status-panel" id="statusPanel" aria-labelledby="statusHeading">
+    <section
+      class="status-panel"
+      id="statusPanel"
+      aria-labelledby="statusHeading"
+    >
       <div class="status-topline">
         <span class="indicator" aria-hidden="true"></span>
         <p class="section-label">Station Status</p>
       </div>
-      <h2 class="status-value" id="statusHeading" aria-live="polite">Loading data…</h2>
-      <p class="connection" id="connection" role="status" aria-live="polite">Connecting to the status sheet</p>
+
+      <h2 class="status-value" id="statusHeading" aria-live="polite">
+        Loading data…
+      </h2>
+
+      <p
+        class="connection"
+        id="connection"
+        role="status"
+        aria-live="polite"
+      >
+        Connecting to the status sheet
+      </p>
     </section>
 
     <section class="dashboard" aria-label="Station details">
       <article class="data-card">
-        <p class="card-label"><span class="card-icon" aria-hidden="true">◷</span>Last updated</p>
+        <p class="card-label">
+          <span class="card-icon" aria-hidden="true">◷</span>
+          Last updated
+        </p>
         <p class="card-value" id="updated">—</p>
       </article>
 
       <article class="data-card">
-        <p class="card-label"><span class="card-icon" aria-hidden="true">⌁</span>Network</p>
+        <p class="card-label">
+          <span class="card-icon" aria-hidden="true">⌁</span>
+          Network
+        </p>
         <p class="card-value" id="network">—</p>
       </article>
 
       <article class="data-card data-card--wide">
-        <p class="card-label"><span class="card-icon" aria-hidden="true">↯</span>Frequency / repeater</p>
+        <p class="card-label">
+          <span class="card-icon" aria-hidden="true">↯</span>
+          Frequency / repeater
+        </p>
         <p class="card-value" id="frequency">—</p>
       </article>
 
       <article class="data-card data-card--wide">
-        <p class="card-label"><span class="card-icon" aria-hidden="true">⌖</span>QTH</p>
+        <p class="card-label">
+          <span class="card-icon" aria-hidden="true">⌖</span>
+          QTH
+        </p>
         <p class="card-value" id="qth">—</p>
       </article>
     </section>
 
     <div class="controls">
-      <p class="source-note">Data is read from a public Google Sheet and refreshed automatically every minute.</p>
+      <p class="source-note">
+        Data is read from a public Google Sheet and refreshed automatically every minute.
+      </p>
+
       <div class="action-group">
-        <a class="qrz-link" href="https://www.qrz.com/db/SP7KJR" target="_blank" rel="noopener noreferrer">Station Info – QRZ</a>
-        <button class="refresh" id="refreshButton" type="button">Refresh now</button>
+        <a
+          class="qrz-link"
+          href="https://www.qrz.com/db/SP7KJR"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Station Info – QRZ
+        </a>
+
+        <button
+          class="refresh"
+          id="refreshButton"
+          type="button"
+        >
+          Refresh now
+        </button>
       </div>
     </div>
 
-    <aside class="comment-card" id="commentCard" aria-labelledby="commentLabel" hidden>
+    <aside
+      class="comment-card"
+      id="commentCard"
+      aria-labelledby="commentLabel"
+      hidden
+    >
       <p class="comment-label" id="commentLabel">Comment</p>
       <p class="comment-value" id="commentText"></p>
     </aside>
 
     <section class="contact-card" aria-labelledby="contactHeading">
       <h2 class="contact-heading" id="contactHeading">Contact</h2>
-      <p class="contact-intro">Call or message me for a QSO or any other radio-related matter.</p>
+
+      <p class="contact-intro">
+        Call or message me for a QSO or any other radio-related matter.
+      </p>
+
       <div class="contact-grid">
         <a class="contact-link" href="mailto:sp7kjr@icloud.com">
           <span class="contact-type">📧 E-mail</span>
           <span class="contact-value">sp7kjr@icloud.com</span>
         </a>
+
         <a class="contact-link" href="tel:+48422077540">
           <span class="contact-type">☎️ Landline</span>
           <span class="contact-value">+48 42 207 75 40</span>
         </a>
+
         <a class="contact-link" href="tel:+48729922686">
           <span class="contact-type">📱 Mobile</span>
           <span class="contact-value">+48 729 922 686</span>
@@ -980,26 +1189,565 @@
     </section>
 
     <aside class="abbreviations" aria-label="Abbreviations">
-      <p class="abbreviation"><strong>Abbreviations:</strong> QRL, DND – Do Not Disturb</p>
-      <p class="abbreviation"><strong>QSX, RX/TX</strong> – Receiving, Transmit</p>
+      <p class="abbreviation">
+        <strong>Abbreviations:</strong>
+        QRL, DND – Do Not Disturb
+      </p>
+
+      <p class="abbreviation">
+        <strong>QSX, RX/TX</strong>
+        – Receiving, Transmit
+      </p>
     </aside>
+
+    <!-- QRZ Logbook -->
+    <section class="qrz-logbook" aria-label="QRZ Logbook">
+      <iframe
+        align="top"
+        frameborder="0"
+        height="500"
+        scrolling="yes"
+        src="https://logbook.qrz.com/lbstat/SP7KJR/"
+        width="640"
+        title="SP7KJR QRZ Logbook"
+      ></iframe>
+    </section>
 
     <footer class="site-footer">
       <p>SP7KJR · Amateur Radio</p>
       <p>© <span id="year"></span> · Status dashboard</p>
     </footer>
 
-    <!-- QRZ logbook iframe added (minimal, non-invasive) -->
-    <iframe align="top" frameborder="0" height="500" scrolling="yes" src="https://logbook.qrz.com/lbstat/SP7KJR/" width="640"></iframe>
-
   </main>
 
   <script>
     "use strict";
 
-    const SHEET_ID = "1O1ScG-qOaguXs9a1Omh4icDcathXGwDEK_adtr5RpIc";
-    const DATA_URL = "https://docs.google.com/spreadsheets/d/" + SHEET_ID + "/gviz/tq?tqx=out:json&headers=1&range=A:B";
+    const SHEET_ID =
+      "1O1ScG-qOaguXs9a1Omh4icDcathXGwDEK_adtr5RpIc";
+
+    const DATA_URL =
+      "https://docs.google.com/spreadsheets/d/" +
+      SHEET_ID +
+      "/gviz/tq?tqx=out:json&headers=1&range=A:B";
+
     const REFRESH_INTERVAL_MS = 60 * 1000;
     const REQUEST_TIMEOUT_MS = 12 * 1000;
     const MAX_RETRIES = 2;
-[...]
+    const CACHE_KEY = "sp7kjr-radio-status-v2";
+
+    const STATUS_FIELD_NAMES = [
+      "status",
+      "updated",
+      "frequency",
+      "network",
+      "qth"
+    ];
+
+    const OPTIONAL_FIELD_NAMES = [
+      "comment"
+    ];
+
+    const FIELD_NAMES =
+      STATUS_FIELD_NAMES.concat(OPTIONAL_FIELD_NAMES);
+
+    const fieldAliases = {
+      status: [
+        "status",
+        "status / notice",
+        "stan"
+      ],
+
+      updated: [
+        "updated",
+        "ostatnia aktualizacja",
+        "aktualizacja"
+      ],
+
+      frequency: [
+        "frequency",
+        "czestotliwosc",
+        "czestotliwosc / przemiennik",
+        "przemiennik"
+      ],
+
+      network: [
+        "network",
+        "siec"
+      ],
+
+      qth: [
+        "qth",
+        "lokalizacja"
+      ],
+
+      comment: [
+        "comment",
+        "komentarz"
+      ]
+    };
+
+    const ui = {
+      clock: document.getElementById("clock"),
+      comment: document.getElementById("commentText"),
+      commentCard: document.getElementById("commentCard"),
+      connection: document.getElementById("connection"),
+      frequency: document.getElementById("frequency"),
+      network: document.getElementById("network"),
+      qth: document.getElementById("qth"),
+      refreshButton: document.getElementById("refreshButton"),
+      status: document.getElementById("statusHeading"),
+      updated: document.getElementById("updated")
+    };
+
+    let isLoading = false;
+
+    function normaliseKey(value) {
+      return String(value ?? "")
+        .trim()
+        .toLocaleLowerCase("en-US")
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "")
+        .replace(/\s+/g, " ");
+    }
+
+    function safeText(value, fallback, maxLength = 160) {
+      const text = String(value ?? "")
+        .replace(/\s+/g, " ")
+        .trim();
+
+      if (!text) return fallback;
+
+      return text.length > maxLength
+        ? text.slice(0, maxLength - 1) + "…"
+        : text;
+    }
+
+    function getCellValue(cell) {
+      if (!cell || typeof cell !== "object") return null;
+      return cell.f ?? cell.v ?? null;
+    }
+
+    function parseVisualizationResponse(payload) {
+      const prefix =
+        "google.visualization.Query.setResponse(";
+
+      const start = payload.indexOf(prefix);
+
+      if (start < 0) {
+        throw new Error(
+          "Unable to identify the sheet response format."
+        );
+      }
+
+      const json = payload
+        .slice(start + prefix.length)
+        .replace(/\)\s*;?\s*$/, "")
+        .trim();
+
+      if (!json) {
+        throw new Error("The sheet returned no data.");
+      }
+
+      const data = JSON.parse(json);
+
+      if (
+        !data.table ||
+        !Array.isArray(data.table.rows)
+      ) {
+        throw new Error(
+          "The sheet response does not contain a data table."
+        );
+      }
+
+      return data;
+    }
+
+    function parseSheetResponse(payload) {
+      const data = parseVisualizationResponse(payload);
+      const values = Object.create(null);
+
+      for (const row of data.table.rows) {
+        const key = getCellValue(row?.c?.[0]);
+        const value = getCellValue(row?.c?.[1]);
+
+        if (
+          key === null ||
+          key === undefined ||
+          value === null ||
+          value === undefined
+        ) {
+          continue;
+        }
+
+        values[normaliseKey(key)] = value;
+      }
+
+      const result = Object.create(null);
+
+      for (const field of STATUS_FIELD_NAMES) {
+        const sourceKey = fieldAliases[field].find(
+          function (alias) {
+            return Object.prototype.hasOwnProperty.call(
+              values,
+              alias
+            );
+          }
+        );
+
+        result[field] = safeText(
+          sourceKey ? values[sourceKey] : null,
+          "—"
+        );
+      }
+
+      for (const field of OPTIONAL_FIELD_NAMES) {
+        const sourceKey = fieldAliases[field].find(
+          function (alias) {
+            return Object.prototype.hasOwnProperty.call(
+              values,
+              alias
+            );
+          }
+        );
+
+        result[field] = safeText(
+          sourceKey ? values[sourceKey] : null,
+          "",
+          900
+        );
+      }
+
+      return result;
+    }
+
+    async function fetchWithTimeout(url) {
+      const controller = new AbortController();
+
+      const timeout = window.setTimeout(
+        function () {
+          controller.abort();
+        },
+        REQUEST_TIMEOUT_MS
+      );
+
+      try {
+        const response = await fetch(url, {
+          cache: "no-store",
+          credentials: "omit",
+          signal: controller.signal
+        });
+
+        if (!response.ok) {
+          throw new Error(
+            "Server returned HTTP status " +
+            response.status +
+            "."
+          );
+        }
+
+        return await response.text();
+      } catch (error) {
+        if (error.name === "AbortError") {
+          throw new Error("Request timed out.");
+        }
+
+        throw error;
+      } finally {
+        window.clearTimeout(timeout);
+      }
+    }
+
+    function delay(milliseconds) {
+      return new Promise(function (resolve) {
+        window.setTimeout(resolve, milliseconds);
+      });
+    }
+
+    async function loadFromSheet() {
+      let lastError;
+
+      for (
+        let attempt = 0;
+        attempt <= MAX_RETRIES;
+        attempt += 1
+      ) {
+        try {
+          const timestamp = Date.now();
+
+          const dataPayload =
+            await fetchWithTimeout(
+              DATA_URL + "&cache=" + timestamp
+            );
+
+          const dataValues =
+            parseSheetResponse(dataPayload);
+
+          return dataValues;
+        } catch (error) {
+          lastError = error;
+
+          if (attempt < MAX_RETRIES) {
+            await delay((attempt + 1) * 700);
+          }
+        }
+      }
+
+      throw (
+        lastError ||
+        new Error("Unable to load status data.")
+      );
+    }
+
+    function setConnection(message, type) {
+      ui.connection.textContent = message;
+
+      ui.connection.className =
+        "connection" +
+        (type ? " is-" + type : "");
+    }
+
+    function updateTheme(status) {
+      const body = document.body;
+      const normalizedStatus = normaliseKey(status);
+
+      body.classList.remove(
+        "theme-offline",
+        "theme-qrl",
+        "theme-onair",
+        "theme-mobile",
+        "theme-alert"
+      );
+
+      if (normalizedStatus.includes("offline")) {
+        body.classList.add("theme-offline");
+      } else if (
+        normalizedStatus.includes("qrl") ||
+        normalizedStatus.includes("dnd")
+      ) {
+        body.classList.add("theme-qrl");
+      } else if (
+        normalizedStatus.includes("scan") ||
+        normalizedStatus.includes("qsx")
+      ) {
+        body.classList.add("theme-onair");
+      } else if (
+        normalizedStatus.includes("mobil") ||
+        normalizedStatus.includes("portable")
+      ) {
+        body.classList.add("theme-mobile");
+      } else if (
+        normalizedStatus.includes("qaz") ||
+        normalizedStatus.includes("alert")
+      ) {
+        body.classList.add("theme-alert");
+      }
+    }
+
+    function applyValues(values) {
+      for (const field of STATUS_FIELD_NAMES) {
+        ui[field].textContent =
+          safeText(values[field], "—");
+      }
+
+      const comment =
+        safeText(values.comment, "", 900);
+
+      ui.comment.textContent = comment;
+      ui.commentCard.hidden = !comment;
+
+      updateTheme(values.status);
+    }
+
+    function saveCache(values) {
+      try {
+        localStorage.setItem(
+          CACHE_KEY,
+          JSON.stringify({
+            savedAt: Date.now(),
+            values: values,
+            version: 1
+          })
+        );
+      } catch (error) {
+        console.warn(
+          "Unable to save the local status cache.",
+          error
+        );
+      }
+    }
+
+    function readCache() {
+      try {
+        const cached = JSON.parse(
+          localStorage.getItem(CACHE_KEY)
+        );
+
+        if (
+          !cached ||
+          cached.version !== 1 ||
+          !cached.values ||
+          !Number.isFinite(cached.savedAt)
+        ) {
+          return null;
+        }
+
+        const values = Object.create(null);
+
+        for (const field of STATUS_FIELD_NAMES) {
+          values[field] =
+            safeText(
+              cached.values[field],
+              "—",
+              160
+            );
+        }
+
+        for (const field of OPTIONAL_FIELD_NAMES) {
+          values[field] =
+            safeText(
+              cached.values[field],
+              "",
+              900
+            );
+        }
+
+        return {
+          savedAt: cached.savedAt,
+          values: values
+        };
+      } catch (error) {
+        return null;
+      }
+    }
+
+    function formatLocalTime(timestamp) {
+      return new Intl.DateTimeFormat(
+        "en-GB",
+        {
+          day: "2-digit",
+          month: "2-digit",
+          year: "numeric",
+          hour: "2-digit",
+          minute: "2-digit"
+        }
+      ).format(timestamp);
+    }
+
+    function updateClock() {
+      ui.clock.textContent =
+        new Intl.DateTimeFormat(
+          "en-GB",
+          {
+            hour: "2-digit",
+            minute: "2-digit",
+            second: "2-digit"
+          }
+        ).format(new Date());
+    }
+
+    function renderUnavailable() {
+      applyValues({
+        status: "No connection to data",
+        updated: "—",
+        frequency: "—",
+        network: "—",
+        qth: "—",
+        comment: ""
+      });
+
+      setConnection(
+        "Unable to load data. Please try again later.",
+        "error"
+      );
+    }
+
+    async function refreshStatus() {
+      if (isLoading) return;
+
+      isLoading = true;
+
+      ui.refreshButton.disabled = true;
+      ui.refreshButton.textContent =
+        "Refreshing…";
+
+      setConnection(
+        "Refreshing data from the sheet…",
+        "warning"
+      );
+
+      try {
+        const values =
+          await loadFromSheet();
+
+        applyValues(values);
+        saveCache(values);
+
+        setConnection(
+          "Connected to the sheet · synced " +
+          formatLocalTime(Date.now()),
+          "success"
+        );
+      } catch (error) {
+        console.error(
+          "SP7KJR status error:",
+          error
+        );
+
+        const cached = readCache();
+
+        if (cached) {
+          applyValues(cached.values);
+
+          setConnection(
+            "Displaying most recently saved data · " +
+            formatLocalTime(cached.savedAt),
+            "warning"
+          );
+        } else {
+          renderUnavailable();
+        }
+      } finally {
+        isLoading = false;
+
+        ui.refreshButton.disabled = false;
+        ui.refreshButton.textContent =
+          "Refresh now";
+      }
+    }
+
+    document.getElementById("year").textContent =
+      String(new Date().getFullYear());
+
+    ui.refreshButton.addEventListener(
+      "click",
+      refreshStatus
+    );
+
+    const cached = readCache();
+
+    if (cached) {
+      applyValues(cached.values);
+
+      setConnection(
+        "Showing saved data · refreshing…",
+        "warning"
+      );
+    }
+
+    updateClock();
+
+    window.setInterval(
+      updateClock,
+      1000
+    );
+
+    refreshStatus();
+
+    window.setInterval(
+      refreshStatus,
+      REFRESH_INTERVAL_MS
+    );
+  </script>
+</body>
+</html>
